@@ -36,16 +36,16 @@ We hope that the Crime Analysis project will prove to be a valuable tool for the
 The following screenshots provide a glimpse of the Crime Analysis project:
 
 1. Authentication:
-![Authentication](Output\ snippets/authentication.png "Authentication")
+![Authentication](OFront-end/Output%20snippets/authentication.png)
 
 2. Options:
-![Options](Output\ snippets/options.png "Options")
+![Options Screenshot](Front-end/Output%20snippets/options.png)
 
 3. Out1:
-![Out1](Output\ snippets/out1.png "Out1")
+![Out1](Front-end/Output%20snippets/out1.png)
 
 4. Out2:
-![Out2](Output\ snippets/out2.png "Out2")
+![Out2](Front-end/Output%20snippets/out2.png)
 
 5. Out3:
-![Out3](Output\ snippets/out3.png "Out3")
+![Out3](Front-end/Output%20snippets/out3.png)
