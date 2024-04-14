@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Database</title>
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Search Database</h2>
+
+        <form action="{{ url_for('search_database') }}" method="POST">
+
+            <label for="District_Name">District Name:</label>
+            <input type="text" id="District_Name" name="district_name">
+
+            <label for="UnitName">Unit Name:</label>
+            <input type="text" id="UnitName" name="unitname">
+
+            <label for="FIRNo">FIR Number:</label>
+            <input type="text" id="FIRNo" name="firno">
+
+            <label for="RI">RI:</label>
+            <input type="text" id="RI" name="ri">
+
+            <label for="Year">Year:</label>
+            <input type="text" id="Year" name="year">
+
+            <label for="Month">Month:</label>
+            <input type="text" id="Month" name="month">
+
+            <label for="Offence_From_Date">Offence From Date:</label>
+            <input type="text" id="Offence_From_Date" name="offence_from_date">
+
+            <label for="Offence_To_Date">Offence To Date:</label>
+            <input type="text" id="Offence_To_Date" name="offence_to_date">
+
+            <label for="FIR_Reg_DateTime">FIR Registration Date Time:</label>
+            <input type="text" id="FIR_Reg_DateTime" name="fir_reg_datetime">
+
+            <label for="FIR_Date">FIR Date:</label>
+            <input type="text" id="FIR_Date" name="fir_date">
+
+            <label for="FIR_Type">FIR Type:</label>
+            <input type="text" id="FIR_Type" name="fir_type">
+
+            <label for="FIR_Stage">FIR Stage:</label>
+            <input type="text" id="FIR_Stage" name="fir_stage">
+
+            <label for="Complaint_Mode">Complaint Mode:</label>
+            <input type="text" id="Complaint_Mode" name="complaint_mode">
+
+            <label for="CrimeGroup_Name">CrimeGroup Name:</label>
+            <input type="text" id="CrimeGroup_Name" name="crimegroup_name">
+
+            <label for="CrimeHead_Name">CrimeHead Name:</label>
+            <input type="text" id="CrimeHead_Name" name="crimehead_name">
+
+            <label for="Latitude">Latitude:</label>
+            <input type="text" id="Latitude" name="latitude">
+
+            <label for="Longitude">Longitude:</label>
+            <input type="text" id="Longitude" name="longitude">
+
+            <label for="ActSection">Act Section:</label>
+            <input type="text" id="ActSection" name="actsection">
+
+            <label for="IOName">IO Name:</label>
+            <input type="text" id="IOName" name="ioname">
+
+            <label for="KGID">KGID:</label>
+            <input type="text" id="KGID" name="kgid">
+
+            <label for="IOAssigned_Date">IO Assigned Date:</label>
+            <input type="text" id="IOAssigned_Date" name="ioassigned_date">
+
+            <label for="Internal_IO">Internal IO:</label>
+            <input type="text" id="Internal_IO" name="internal_io">
+
+            <label for="Place_of_Offence">Place of Offence:</label>
+            <input type="text" id="Place_of_Offence" name="place_of_offence">
+
+            <label for="Distance_from_PS">Distance from PS:</label>
+            <input type="text" id="Distance_from_PS" name="distance_from_ps">
+
+            <label for="Beat_Name">Beat Name:</label>
+            <input type="text" id="Beat_Name" name="beat_name">
+
+            <label for="Village_Area_Name">Village Area Name:</label>
+            <input type="text" id="Village_Area_Name" name="village_area_name">
+
+            <label for="Male">Male:</label>
+            <input type="text" id="Male" name="male">
+
+            <label for="Female">Female:</label>
+            <input type="text" id="Female" name="female">
+
+            <label for="Boy">Boy:</label>
+            <input type="text" id="Boy" name="boy">
+
+            <label for="Girl">Girl:</label>
+            <input type="text" id="Girl" name="girl">
+
+            <label for="Age">Age:</label>
+            <input type="text" id="Age" name="age">
+
+            <label for="VICTIM_COUNT">Victim Count:</label>
+            <input type="text" id="VICTIM_COUNT" name="victim_count">
+
+            <label for="Accused_Count">Accused Count:</label>
+            <input type="text" id="Accused_Count" name="accused_count">
+
+            <label for="Arrested_Male">Arrested Male:</label>
+            <input type="text" id="Arrested_Male" name="arrested_male">
+
+            <label for="Arrested_Female">Arrested Female:</label>
+            <input type="text" id="Arrested_Female" name="arrested_female">
+
+            <label for="Arrested_Count">Arrested Count:</label>
+            <input type="text" id="Arrested_Count" name="arrested_count">
+
+            <label for="Accused_ChargeSheeted_Count">Accused Chargesheeted Count:</label>
+            <input type="text" id="Accused_ChargeSheeted_Count" name="accused_chargesheeted_count">
+
+            <label for="Conviction_Count">Conviction Count:</label>
+            <input type="text" id="Conviction_Count" name="conviction_count">
+
+            <label for="FIR_ID">FIR ID:</label>
+            <input type="text" id="FIR_ID" name="fir_id">
+
+            <label for="Unit_ID">Unit ID:</label>
+            <input type="text" id="Unit_ID" name="unit_id">
+
+            <label for="Crime_No">Crime Number:</label>
+            <input type="text" id="Crime_No" name="crime_no">
+
+
+            <input type="submit" value="Search">
+
+        </form>
+    </div>
+</body>
+
+</html>

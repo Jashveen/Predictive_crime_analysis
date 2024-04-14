@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Analysis</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            background: #070F2B;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        header {
+            background:linear-gradient(to left, #720455, #3C0753);
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bolder;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .chart-container {
+            display: flex;
+            flex-direction: column; /* Change to column layout */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            height: 100%; /* Add height */
+        }
+        .chart-container > div {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            max-height: 600px;
+            max-width: 900px; /* Set max-width for responsiveness */
+            text-align: center;
+            border-radius: 8px;
+        }
+        button {
+            background: linear-gradient(to left, #720455, #3C0753);
+            color: #fff;
+            border: #fff;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative; /* Add position relative for loading card */
+        }
+        .button-container button {
+            display: inline-block; /* Added */
+        }
+
+        button:hover {
+            background: linear-gradient(to left, #910A67,#3C0753);
+            border:2px solid #3d9cd7;
+        }
+        #modeButtons {
+            text-align: center;
+            margin: 10px 0;
+        }
+        #modeButtons button {
+            margin: 0 10px;
+        }
+        #districtSelect {
+            font-size: 16px;
+            padding: 8px 12px;
+            border: 1px solid #A34343;
+            border-radius: 4px;
+            background-color: #FBF8DD;
+            color: #333;
+        }
+        /* Add a new class for the button container */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .loading-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            background: black;
+            padding-top: 150px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            z-index: 9999; /* Added */
+        }
+        .loader,
+        .loader:before,
+        .loader:after {
+            width: 35px;
+            aspect-ratio: 1;
+            box-shadow: 0 0 0 3px inset #fff;
+            position: relative;
+            animation: l6 1.5s infinite 0.5s;
+        }
+        .loader:before,
+        .loader:after {
+            content: "";
+            position: absolute;
+            left: calc(100% + 5px);
+            animation-delay: 1s;
+        }
+        .loader:after {
+            left: -40px;
+            animation-delay: 0s;
+        }
+        @keyframes l6 {
+            0%, 55%, 100% { border-radius: 0; }
+            20%, 30% { border-radius: 50%; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>CRIME ANALYSIS</h1>
+    </header>
+
+    <div id="modeButtons">
+        <button id="stateWiseBtn" onclick="showStateWiseAnalysis()" style="margin-right: 20px;font-weight:bold; border-color: #fff;">State-wise</button>
+        <button id="districtWiseBtn" onclick="showDistrictWiseAnalysis()" style="font-weight: bold; border-color: #fff;">District-wise</button>
+    </div>
+
+    <div id="stateWiseAnalysis" style="display: none;">
+        <div class="chart-container">
+            <div>
+                <h2 style="text-align: center;font-weight: 100;">Bar Chart</h2>
+                <iframe id="bar-chart" src="{{ url_for('serve_bar_chart') }}" width="850" height="500"></iframe>
+            </div>
+            <div>
+                <h2 style="text-align: center;font-weight: 100;">Pie Chart</h2>
+                <iframe id="pie-chart" src="{{ url_for('serve_pie_chart') }}" width="850" height="500"></iframe>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <button type="button" onclick="loadChoroplethMap()" style="font-size: 20px; padding: 10px 20px; background-color: #455d7a; color: #ffffff; border: none; border-radius: 5px; cursor: pointer;">
+                    Load Choropleth Map
+                </button>
+            </div> 
+        </div>
+    </div>
+
+    <div id="districtWiseAnalysis" style="display: none; text-align: center;">
+        <label for="districtSelect" style="color: #fff; font-size: large; font-weight: 500;">Select a District:</label>
+        <select id="districtSelect">
+            <option value="">-- Choose a District --</option>
+            <option value="Bagalkot">Bagalkot</option>
+            <option value="Ballari">Ballari</option>
+            <option value="'Belagavi City">Belagavi City</option>
+            <option value="Belagavi Dist">Belagavi Dist</option>
+            <option value="Bengaluru City">Bengaluru City</option>
+            <option value="Bengaluru Dist">Bengaluru Dist</option>
+            <option value="Bidar">Bidar</option>
+            <option value="Chamarajanagar">Chamarajanagar</option>
+            <option value="Chickballapura">Chickballapura</option>
+            <option value="Chikkamagaluru">Chikkamagaluru</option>
+            <option value="Chitradurga">Chitradurga</option>
+            <option value="CID">CID</option>
+            <option value="Coastal Security Police">Coastal Security Police</option>
+            <option value="Dakshina Kannada">Dakshina Kannada</option>
+            <option value="Davanagere">Davanagere</option>
+            <option value="Dharwad">Dharwad</option>
+            <option value="Gadag">Gadag</option>
+            <option value="Hassan">Hassan</option>
+            <option value="Haveri">Haveri</option>
+            <option value="Hubballi Dharwad City">Hubballi Dharwad City</option>
+            <option value="ISD Bengaluru">ISD Bengaluru</option>
+            <option value="K.G.F">K.G.F</option>
+            <option value="Kalaburagi">Kalaburagi</option>
+            <option value="Kalaburagi City">Kalaburagi City</option>
+            <option value="Karnataka Railways">Karnataka Railways</option>
+            <option value="Kodagu">Kodagu</option>
+            <option value="Kolar">Kolar</option>
+            <option value="Koppal">Koppal</option>
+            <option value="Mandya">Mandya</option>
+            <option value="Mangaluru City">Mangaluru City</option>
+            <option value="Mysuru City">Mysuru City</option>
+            <option value="Raichur">Raichur</option>
+            <option value="Ramanagara">Ramanagara</option>
+            <option value="Shivamogga">Shivamogga</option>
+            <option value="Tumakuru">Tumakuru</option>
+            <option value="Udupi">Udupi</option>
+            <option value="Uttara Kannada">Uttara Kannada</option>
+            <option value="Vijayanagara">Vijayanagara</option>
+            <option value="Vijayapur">Vijayapur</option>
+            <option value="Yadgir">Yadgir</option>
+            <!-- Add more options for other districts -->
+        </select>
+        <button id="startAnalysisButton" onclick="startAnalysis()">Start Analysis</button>
+        <div class="loading-card">
+            <div class="loader"></div>
+        </div>
+        <div id="district-heatmap-container" class="chart-container">
+            <h2 style="text-align: center;font-weight: 100;color: #fff;">District Heatmap</h2>
+            <iframe id="district-heatmap" width="550" height="350"></iframe>
+        </div>
+        <div id="printed-statements-container" style="color: #fff; font-size: large; text-align: center;"></div>
+        </div>
+        
+    </div>
+    <div id="analysis-results"></div>
+
+    <script>
+        function showStateWiseAnalysis() {
+            document.getElementById('stateWiseAnalysis').style.display = 'block';
+            document.getElementById('districtWiseAnalysis').style.display = 'none';
+
+            // Fetch and display bar chart and pie chart
+            fetchAndDisplayCharts();
+        }
+
+        function showDistrictWiseAnalysis() {
+            document.getElementById('stateWiseAnalysis').style.display = 'none';
+            document.getElementById('districtWiseAnalysis').style.display = 'block';
+        }
+
+        function startAnalysis() {
+            const district = document.getElementById('districtSelect').value;
+            if (district) {
+                const loadingCard = document.querySelector('.loading-card');
+                if (loadingCard) {
+                    loadingCard.style.display = 'block'; // Show the loading card
+
+                    const heatmapUrl = `/generate_heatmap/${district}`;
+                    fetch(heatmapUrl)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Expect a JSON response containing both the filename and printed statements
+                            } else {
+                                throw new Error('Error generating heatmap');
+                            }
+                        })
+                        .then(data => {
+                            const heatmapIframe = document.getElementById('district-heatmap');
+                            heatmapIframe.src = `/static/${data.heatmap_filename}`;
+                            const printedStatements = data.printed_statements;
+                            const printedStatementsContainer = document.getElementById('printed-statements-container');
+                            printedStatementsContainer.innerHTML = ''; // Clear previous content
+                            printedStatements.forEach(statement => {
+                                const p = document.createElement('p');
+                                p.textContent = statement;
+                                printedStatementsContainer.appendChild(p);
+                            });
+                            loadingCard.style.display = 'none'; // Hide the loading card
+                        })
+                        .catch(error => {
+                            console.error('Error fetching heatmap:', error);
+                            loadingCard.style.display = 'none'; // Hide the loading card
+                        });
+                } else {
+                    console.error('Loading card element not found');
+                }
+            }
+        }
+
+
+        function fetchAndDisplayCharts() {
+            // Fetch and display pie chart
+            fetch("{{ url_for('serve_pie_chart') }}")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("pie-chart").innerHTML = html;
+                });
+
+            // Fetch and display bar chart
+            fetch("{{ url_for('serve_bar_chart') }}")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("bar-chart").innerHTML = html;
+                });
+        }
+
+        function loadChoroplethMap() {
+            fetch("{{ url_for('serve_choropleth_map_html') }}")
+                .then(response => response.text())
+                .then(html => {
+                    const analysisResultsDiv = document.getElementById("analysis-results");
+                    if (analysisResultsDiv) {
+                        analysisResultsDiv.innerHTML = html;
+                    } else {
+                        console.error("Element with ID 'analysis-results' not found.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching choropleth map:', error);
+                });
+        }
+    </script>
+</body>
+</html>

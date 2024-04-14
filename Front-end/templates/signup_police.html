@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Signup</title>
+    <style>
+        body {
+            background: #09184f;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            background:linear-gradient(to left, #720455, #3C0753);
+            border-bottom: 2px solid #fff;
+            font-size: 36px;
+            font-weight: bolder;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgb(11, 10, 10);
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background: #481d3c;
+            border: 2px solid #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="date"], input[type="tel"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ecebeb;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        label {
+            font-weight: bold;
+        }
+        .error-message {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var name = document.getElementById("name").value;
+            var rank = document.getElementById("rank").value;
+            var district = document.getElementById("district").value;
+            var dob = document.getElementById("dob").value;
+            var phone = document.getElementById("phone").value;
+
+            var errorMessage = "";
+            if (username.trim() == "") {
+                errorMessage += "Username is required.\n";
+            }
+            if (password.trim() == "") {
+                errorMessage += "Password is required.\n";
+            }
+            if (name.trim() == "") {
+                errorMessage += "Name is required.\n";
+            }
+            if (rank.trim() == "") {
+                errorMessage += "Rank is required.\n";
+            }
+            if (district.trim() == "") {
+                errorMessage += "District is required.\n";
+            }
+            if (dob.trim() == "") {
+                errorMessage += "Date of Birth is required.\n";
+            }
+            if (phone.trim() == "") {
+                errorMessage += "Phone Number is required.\n";
+            }
+
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h2 style="text-align: center; color: #fff;">Police Signup</h2>
+        <form method="POST" onsubmit="return validateForm()">
+            <label for="username" style="color: #fff;">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="password" style="color: #fff;">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <label for="name" style="color: #fff;">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="rank" style="color: #fff;">Rank:</label><br>
+            <input type="text" id="rank" name="rank" required><br><br>
+            
+            <label for="district" style="color: #fff;">District:</label><br>
+            <input type="text" id="district" name="district" required><br><br>
+            
+            <label for="dob" style="color: #fff;">Date of Birth:</label><br>
+            <input type="date" id="dob" name="dob" required><br><br>
+            
+            <label for="phone" style="color: #fff;">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            
+            <input type="submit" value="Signup">
+            <p style="background: #fff;background:linear-gradient(to left, #720455, #3C0753);border: 2px solid #fff;color: #fff;">Already have an account?<a style="color: yellow;" href="/login_police">Login if already have an account</a></p>
+        </form>
+     </div>
+</body>
+</html>

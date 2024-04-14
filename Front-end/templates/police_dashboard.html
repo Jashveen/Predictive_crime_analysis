@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Banchschrft', Arial, sans-serif;
+            background-color: #070F2B;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(to left, #720455, #3C0753);
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            font-weight: 500;
+            color: #fff;
+            margin-top: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        h2{
+            color: #fff;
+        }
+        .option-buttons{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 15%;
+            text-align: center;
+        }
+        .option-button {
+            padding: 20px 40px;
+            font-size: 20px;
+            background: linear-gradient(to left, #720455, #3C0753);
+            color: white;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+        .option-button:hover {
+            background-color: #45a049;
+        }
+        .logout-button {
+            position: absolute;
+            bottom: 350px;
+            left: 950px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f44336;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>POLICE DASHBOARD</h1>
+    </header>
+    <h2>Welcome, {{ username }}</h2>
+    <div class="container">
+        <button class="logout-button"><a href="{{ url_for('logout') }}" style="text-decoration: none; color: white;border: #fff;">Logout</a></button>
+        <div class="option-buttons">
+            <a href="{{ url_for('submit_form') }}" class="option-button">ENTER RECORD</a>
+            <div style="width: 20px;"></div>
+            <a href="{{ url_for('search_database') }}" class="option-button">SEARCH DATABASE</a>
+            <div style="width: 20px;"></div>
+            <a href="{{ url_for('crime_analysis') }}" class="option-button">CRIME ANALYSIS</a>
+        </div>
+    </div>
+</body>
+</html>

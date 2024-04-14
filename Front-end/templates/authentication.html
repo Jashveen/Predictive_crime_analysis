@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #09184f;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-bottom: 200px;
+        }
+        .button {
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s ease;
+            outline: none;
+            color: #fff;
+        }
+        .button img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .button-police {
+            width: 150px;
+            height: 160px;
+            background-color: #720455;
+            border: 2px solid #3d9cd7;
+            box-shadow: 0 8px 18px rgba(52, 152, 219, 0.5);
+        }
+        .button-user {
+            width: 150px;
+            height: 160px;
+            background-color: #3C0753;
+            border: 2px solid #3d9cd7;
+            box-shadow: 0 8px 18px rgba(46, 204, 113, 0.5);
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header style="background:linear-gradient(to left, #720455, #3C0753);color: #fff; border: 2px solid #3d9cd7; border-radius: 5px; padding: 20px;text-align: center;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+        <h1 style="font-size:xX-large; font-weight: bolder;">AUTHENTICATION</h1>
+    </header>
+    <div class="button-container">
+        <button class="button button-police" style="font-weight: bold;" onclick="redirectTo('police')" style="border-color: #fff;">
+            <img src="{{ url_for('static', filename='pngtree-police-line-icon-png-image_9088693.png') }}" alt="Police Icon">
+            Police
+        </button>
+        <button class="button button-user" style="font-weight: bold;"onclick="redirectTo('user')">
+            <img src="{{ url_for('static', filename='user-icon-on-transparent-background-free-png.webp') }}" alt="User Icon">
+            User
+        </button>
+    </div>
+
+    <script>
+        function redirectTo(role) {
+            if (role === 'police') {
+                window.location.href = '/signup_police';
+            } else if (role === 'user') {
+                window.location.href = '/signup_user';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter FIR</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional: Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Enter FIR Record</h1>
+        <form action="{{ url_for('submit_form') }}" method="post">
+            <div class="form-group">
+                <label for="district_name">District Name:</label>
+                <select class="form-control" id="district_name" name="district_name" required>
+                    <option value="" disabled selected>Select District</option>
+                    <option value="Bengaluru City">Bengaluru City</option>
+                    <option value="Bengaluru Dist">Bengaluru Dist</option>
+                    <option value="Tumakuru">Tumakuru</option>
+                    <option value="Shivamogga">Shivamogga</option>
+                    <option value="Mandya">Mandya</option>
+                    <option value="Belagavi Dist">Belagavi Dist</option>
+                    <option value="Hassan">Hassan</option>
+                    <option value="Mysuru Dist">Mysuru Dist</option>
+                    <option value="Chitradurga">Chitradurga</option>
+                    <option value="Ramanagara">Ramanagara</option>
+                    <option value="Vijayapur">Vijayapur</option>
+                    <option value="Davanagere">Davanagere</option>
+                    <option value="Bidar">Bidar</option>
+                    <option value="Chickballapura">Chickballapura</option>
+                    <option value="Raichur">Raichur</option>
+                    <option value="Chikkamagaluru">Chikkamagaluru</option>
+                    <option value="Uttara Kannada">Uttara Kannada</option>
+                    <option value="Mangaluru City">Mangaluru City</option>
+                    <option value="Kalaburagi">Kalaburagi</option>
+                    <option value="Mysuru City">Mysuru City</option>
+                    <option value="Haveri">Haveri</option>
+                    <option value="Ballari">Ballari</option>
+                    <option value="Udupi">Udupi</option>
+                    <option value="Bagalkot">Bagalkot</option>
+                    <option value="Vijayanagara">Vijayanagara</option>
+                    <option value="Koppal">Koppal</option>
+                    <option value="Hubballi Dharwad City">Hubballi Dharwad City</option>
+                    <option value="Kolar">Kolar</option>
+                    <option value="Chamarajanagar">Chamarajanagar</option>
+                    <option value="Dakshina Kannada">Dakshina Kannada</option>
+                    <option value="Belagavi City">Belagavi City</option>
+                    <option value="Kalaburagi City">Kalaburagi City</option>
+                    <option value="Yadgir">Yadgir</option>
+                    <option value="Kodagu">Kodagu</option>
+                    <option value="Gadag">Gadag</option>
+                    <option value="Dharwad">Dharwad</option>
+                    <option value="K.G.F">K.G.F</option>
+                    <option value="Karnataka Railways">Karnataka Railways</option>
+                    <option value="CID">CID</option>
+                    <option value="Coastal Security Police">Coastal Security Police</option>
+                    <option value="ISD Bengaluru">ISD Bengaluru</option>
+                </select>
+            </div>
+
+
+            <!-- Unit Name -->
+            <div class="form-group">
+                <label for="unit_name">Unit Name:</label>
+                <input type="text" class="form-control" id="unit_name" name="unit_name" required>
+            </div>
+
+            <!-- FIR No -->
+            <div class="form-group">
+                <label for="fir_no">FIR No:</label>
+                <input type="text" class="form-control" id="fir_no" name="fir_no" required>
+            </div>
+
+            <!-- RI -->
+            <div class="form-group">
+                <label for="ri">RI:</label>
+                <input type="text" class="form-control" id="ri" name="ri" required>
+            </div>
+
+            <!-- Year and Month (Automatic) -->
+            <div class="form-group">
+                <label for="year_month">Year and Month:</label>
+                <input type="text" class="form-control" id="year_month" name="year_and_month" value="{{ current_year_and_month }}" readonly>
+            </div>
+
+            <!-- Offence From Date -->
+            <div class="form-group">
+                <label for="offence_from_date">Offence From Date:</label>
+                <input type="date" class="form-control" id="offence_from_date" name="offence_from_date" required>
+            </div>
+
+            <!-- Offence To Date -->
+            <div class="form-group">
+                <label for="offence_to_date">Offence To Date:</label>
+                <input type="date" class="form-control" id="offence_to_date" name="offence_to_date" required>
+            </div>
+
+            <!-- FIR Reg DateTime (Automatic) -->
+            <div class="form-group">
+                <label for="fir_reg_datetime">FIR Reg DateTime:</label>
+                <input type="text" class="form-control" id="fir_reg_datetime" name="fir_reg_datetime" value="{{ current_datetime }}" readonly>
+            </div>
+
+            <!-- FIR Date -->
+            <div class="form-group">
+                <label for="fir_date">FIR Date:</label>
+                <input type="date" class="form-control" id="fir_date" name="fir_date" required>
+            </div>
+
+            <!-- FIR Type -->
+            <div class="form-group">
+                <label for="fir_type">FIR Type:</label>
+                <select class="form-control" id="fir_type" name="fir_type" required>
+                    <option value="Non Heinous">Non Heinous</option>
+                    <option value="Heinous">Heinous</option>
+                </select>
+            </div>
+
+
+             <!-- FIR Stage -->
+            <div class="form-group">
+                <label for="fir_stage">RI:</label>
+                <select class="form-control" id="fir_stage" name="fir_stage" required>
+                    <option value="FIR_Stage">FIR_Stage</option>
+                    <option value="Pending Trial">Pending Trial</option>
+                    <option value="Convicted">Convicted</option>
+                    <option value="Undetected">Undetected</option>
+                    <option value="Dis/Acq">Dis/Acq</option>
+                    <option value="BoundOver">BoundOver</option>
+                    <option value="Traced">Traced</option>
+                    <option value="Under Investigation">Under Investigation</option>
+                    <option value="False Case">False Case</option>
+                    <option value="Compounded">Compounded</option>
+                    <option value="Other Disposal">Other Disposal</option>
+                    <option value="Abated">Abated</option>
+                    <option value="Un Traced">Un Traced</option>
+                    <option value="Transfered">Transfered</option>
+                </select>
+            </div>
+
+
+            <!-- Complaint Mode -->
+            <div class="form-group">
+                <label for="complaint_mode">Complaint Mode:</label>
+                <select class="form-control" id="complaint_mode" name="complaint_mode" required>
+                    <option value="Complaint_Mode">Complaint_Mode</option>
+                    <option value="Written">Written</option>
+                    <option value="Sue-moto by Police">Sue-moto by Police</option>
+                    <option value="Oral">Oral</option>
+                    <option value="Others">Others</option>
+                    <option value="Judicial/Magistrate reference">Judicial/Magistrate reference</option>
+                    <option value="Written & Organised">Written & Organised</option>
+                    <option value="Oral & Organised">Oral & Organised</option>
+                    <option value="Online">Online</option>
+                    <option value="Judicial/Magistrate Reference & Organised">Judicial/Magistrate Reference & Organised</option>
+                    <option value="Distress call over phone">Distress call over phone</option>
+                </select>
+            </div>
+
+
+            <!-- CrimeGroup Name -->
+            <div class="form-group">
+                <label for="crimegroup_name">CrimeGroup Name:</label>
+                <select class="form-control" id="crimegroup_name" name="crimegroup_name" required>
+                    <option value="">Select CrimeGroup Name</option>
+                    <option value="MOTOR VEHICLE ACCIDENTS NON-FATAL">MOTOR VEHICLE ACCIDENTS NON-FATAL</option>
+                    <option value="THEFT">THEFT</option>
+                    <option value="CrPC">CrPC</option>
+                    <option value="CASES OF HURT">CASES OF HURT</option>
+                    <option value="MISSING PERSON">MISSING PERSON</option>
+                    <option value="KARNATAKA POLICE ACT 1963">KARNATAKA POLICE ACT 1963</option>
+                    <option value="Karnataka State Local Act">Karnataka State Local Act</option>
+                    <option value="MOTOR VEHICLE ACCIDENTS FATAL">MOTOR VEHICLE ACCIDENTS FATAL</option>
+                    <option value="CYBER CRIME">CYBER CRIME</option>
+                    <option value="CHEATING">CHEATING</option>
+                    <option value="MOLESTATION">MOLESTATION</option>
+                    <option value="PUBLIC SAFETY">PUBLIC SAFETY</option>
+                    <option value="RIOTS">RIOTS</option>
+                    <option value="BURGLARY - NIGHT">BURGLARY - NIGHT</option>
+                    <option value="NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES">NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES</option>
+                    <option value="KIDNAPPING AND ABDUCTION">KIDNAPPING AND ABDUCTION</option>
+                    <option value="Failure to appear to Court">Failure to appear to Court</option>                                               
+                    <option value="NEGLIGENT ACT">NEGLIGENT ACT</option>
+                    <option value="ATTEMPT TO MURDER">ATTEMPT TO MURDER</option>
+                    <option value="POCSO">POCSO</option>
+                    <option value="CRUELTY BY HUSBAND">CRUELTY BY HUSBAND</option>
+                    <option value="CRIMINAL INTIMIDATION">CRIMINAL INTIMIDATION</option>
+                    <option value="ROBBERY">ROBBERY</option>
+                    <option value="CRIMES RELATED TO WOMEN">CRIMES RELATED TO WOMEN</option>
+                    <option value="SCHEDULED CASTE AND THE SCHEDULED TRIBES">SCHEDULED CASTE AND THE SCHEDULED TRIBES</option>
+                    <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
+                    <option value="MURDER">MURDER</option>
+                    <option value="OFFENCES AGAINST PUBLIC SERVANTS (Public servant is a victim)">OFFENCES AGAINST PUBLIC SERVANTS (Public servant is a victim)</option>
+                    <option value="BURGLARY - DAY">BURGLARY - DAY</option>
+                    <option value="SUICIDE">SUICIDE</option>
+                    <option value="DACOITY">DACOITY</option>
+                    <option value="RAPE">RAPE</option>
+                    <option value="CONSUMER">CONSUMER</option>
+                    <option value="CRIMINAL BREACH OF TRUST">CRIMINAL BREACH OF TRUST</option>
+                    <option value="MISCHIEF">MISCHIEF</option>
+                    <option value="WRONGFUL RESTRAINT/CONFINEMENT">WRONGFUL RESTRAINT/CONFINEMENT</option>
+                    <option value="COTPA, CIGARETTES AND OTHER TOBACCO PRODUCTS">COTPA, CIGARETTES AND OTHER TOBACCO PRODUCTS</option>
+                    <option value="FORGERY">FORGERY</option>
+                    <option value="AFFRAY">AFFRAY</option>
+                    <option value="DEATHS DUE TO RASHNESS/NEGLIGENCE">DEATHS DUE TO RASHNESS/NEGLIGENCE</option>
+                    <option value="Disobedience to Order Promulgated by PublicServan">Disobedience to Order Promulgated by PublicServan</option>
+                    <option value="ELECTION">ELECTION</option>
+                    <option value="ARSON">ARSON</option>
+                    <option value="CHILDREN ACT">CHILDREN ACT</option>
+                    <option value="ANIMAL">ANIMAL</option>
+                    <option value="IMMORAL TRAFFIC">IMMORAL TRAFFIC</option>
+                    <option value="COMMUNAL / RELIGION">COMMUNAL / RELIGION</option>
+                    <option value="ILLEGAL DETENTION">ILLEGAL DETENTION</option>
+                    <option value="ARMS ACT 1959">ARMS ACT 1959</option>
+                    <option value="Attempting to commit offences">Attempting to commit offences</option>
+                    <option value="DOWRY DEATHS">DOWRY DEATHS</option>
+                    <option value="COPY RIGHT ACT 1957">COPY RIGHT ACT 1957</option>
+                    <option value="REPRESENTATION OF PEOPLE ACT 1951 & 1988">REPRESENTATION OF PEOPLE ACT 1951 & 1988</option>
+                    <option value="PREVENTION OF DAMAGE TO PUBLIC PROPERTY ACT 1984">PREVENTION OF DAMAGE TO PUBLIC PROPERTY ACT 1984</option>
+                    <option value="INSULTING MODESTY OF WOMEN (EVE TEASING)">INSULTING MODESTY OF WOMEN (EVE TEASING)</option>
+                    <option value="EXPLOSIVES">EXPLOSIVES</option>
+                    <option value="EXPOSURE AND ABANDONMENT OF CHILD">EXPOSURE AND ABANDONMENT OF CHILD</option>
+                    <option value="CULPABLE HOMICIDE NOT AMOUNTING TO MURDER">CULPABLE HOMICIDE NOT AMOUNTING TO MURDER</option>
+                    <option value="OFFENCES PROMOTING ENEMITY">OFFENCES PROMOTING ENEMITY</option>
+                    <option value="Concealment of birth by secret disposal of Child">Concealment of birth by secret disposal of Child</option>
+                    <option value="PUBLIC NUISANCE">PUBLIC NUISANCE</option>
+                    <option value="FOREIGNER">FOREIGNER</option>
+                    <option value="OFFENCES RELATED TO MARRIAGE">OFFENCES RELATED TO MARRIAGE</option>
+                    <option value="ESCAPE FROM LAWFUL CUSTODY AND RESISTANCE">ESCAPE FROM LAWFUL CUSTODY AND RESISTANCE</option>
+                    <option value="COUNTERFEITING">COUNTERFEITING</option>
+                    <option value="ATTEMPT TO CULPABLE HOMICIDE NOT AMOUNTING TO MURDER">ATTEMPT TO CULPABLE HOMICIDE NOT AMOUNTING TO MURDER</option>
+                    <option value="ASSAULT">ASSAULT</option>
+                    <option value="PASSPORT ACT">PASSPORT ACT</option>
+                    <option value="FALSE EVIDENCE">FALSE EVIDENCE</option>
+                    <option value="CRIMINAL CONSPIRACY">CRIMINAL CONSPIRACY</option>
+                    <option value="ADULTERATION">ADULTERATION</option>
+                    <option value="POISONING-PROFESSIONAL">POISONING-PROFESSIONAL</option>
+                    <option value="INDIAN ELECTRICITY ACT">INDIAN ELECTRICITY ACT</option>
+                    <option value="FOREST">FOREST</option>
+                    <option value="BONDED LABOUR SYSTEM">BONDED LABOUR SYSTEM</option>
+                    <option value="CRIMINAL MISAPPROPRIATION">CRIMINAL MISAPPROPRIATION</option>
+                    <option value="PORNOGRAPHY">PORNOGRAPHY</option>
+                    <option value="DEATHS-MISCARRIAGE">DEATHS-MISCARRIAGE</option>
+                    <option value="Human Trafficking">Human Trafficking</option>
+                    <option value="INDIAN MOTOR VEHICLE">INDIAN MOTOR VEHICLE</option>
+                    <option value="OFFENCES BY PUBLIC SERVANTS (EXCEPT CORRUPTION) (Public servant is accused)">OFFENCES BY PUBLIC SERVANTS (EXCEPT CORRUPTION) (Public servant is accused)</option>
+                    <option value="DEFAMATION">DEFAMATION</option>
+                    <option value="ASSAULT OR USE OF CRIMINAL FORCE TO DISROBE WOMAN">ASSAULT OR USE OF CRIMINAL FORCE TO DISROBE WOMAN</option>
+                    <option value="SLAVERY">SLAVERY</option>
+                    <option value="IMPERSONATION">IMPERSONATION</option>
+                    <option value="OF ABETMENT">OF ABETMENT</option>
+                    <option value="ANTIQUES (CULTURAL PROPERTY)">ANTIQUES (CULTURAL PROPERTY)</option>
+                    <option value="UNNATURAL SEX">UNNATURAL SEX</option>
+                    <option value="RAILWAYS ACT">RAILWAYS ACT</option>
+                    <option value="CIVIL RIGHTS">CIVIL RIGHTS</option>
+                    <option value="OFFICIAL SECURITY RELATED ACTS">OFFICIAL SECURITY RELATED ACTS</option>
+                    <option value="SEDITION">SEDITION</option>
+                    <option value="PUBLIC JUSTICE">PUBLIC JUSTICE</option>
+                    <option value="POST & TELEGRAPH,TELEGRAPH WIRES(UNLAWFUL POSSESSION)ACT 1950">POST & TELEGRAPH,TELEGRAPH WIRES(UNLAWFUL POSSESSION)ACT 1950</option>
+                    <option value="UNLAWFUL ACTIVITIES(Prevention)ACT 1967">UNLAWFUL ACTIVITIES(Prevention)ACT 1967</option>
+                    <option value="DOCUMENTS & PROPERTY MARKS">DOCUMENTS & PROPERTY MARKS</option>
+                    <option value="RECEIVING OF STOLEN PROPERTY">RECEIVING OF STOLEN PROPERTY</option>
+                    <option value="Giving false information respecting an offence com">Giving false information respecting an offence com</option>
+                    <option value="INFANTICIDE">INFANTICIDE</option>
+                    <option value="FAILURE TO APPEAR TO COURT">FAILURE TO APPEAR TO COURT</option>
+                    <option value="UNNATURAL DEATH (Sec 174/174c/176)">UNNATURAL DEATH (Sec 174/174c/176)</option>
+                    <option value="DEFENCE FORCES OFFENCES RELATING TO (also relating to desertion)">DEFENCE FORCES OFFENCES RELATING TO (also relating to desertion)</option>
+                    <option value="CINEMATOGRAPH ACT 1952">CINEMATOGRAPH ACT 1952</option>
+                    <option value="PREVENTION OF CORRUPTION ACT 1988">PREVENTION OF CORRUPTION ACT 1988</option>
+                    <option value="OFFENCES AGAINST STATE">OFFENCES AGAINST STATE</option>
+                    <option value="BUYING & SELLING MINOR FOR PROSTITUTION">BUYING & SELLING MINOR FOR PROSTITUTION</option>
+                    <option value="NATIONAL SECURITY ACT">NATIONAL SECURITY ACT</option>
+                    <option value="ILLEGAL DETENTION">ILLEGAL DETENTION</option>
+                </select>
+            </div>
+
+            <!-- CrimeHead Name -->
+            <div class="form-group">
+                <label for="crimehead_name">CrimeHead Name:</label>
+                <input type="text" class="form-control" id="crimehead_name" name="crimehead_name" required>
+            </div>
+
+            <!-- Latitude -->
+            <div class="form-group">
+                <label for="latitude">Latitude:</label>
+                <input type="text" class="form-control" id="latitude" name="latitude" required>
+            </div>
+
+            <!-- Longitude -->
+            <div class="form-group">
+                <label for="longitude">Longitude:</label>
+                <input type="text" class="form-control" id="longitude" name="longitude" required>
+            </div>
+
+            <!-- ActSection -->
+            <div class="form-group">
+                <label for="act_section">Act Section:</label>
+                <input type="text" class="form-control" id="act_section" name="actsection" required>
+            </div>
+
+            <!-- IO Name -->
+            <div class="form-group">
+                <label for="ioname">IO Name:</label>
+                <input type="text" class="form-control" id="ioname" name="ioname" required>
+            </div>
+
+            <!-- KGID -->
+            <div class="form-group">
+                <label for="kgid">KGID:</label>
+                <input type="text" class="form-control" id="kgid" name="kgid" required>
+            </div>
+
+            <!-- IO Assigned Date -->
+            <div class="form-group">
+                <label for="io_assigned_date">IO Assigned Date:</label>
+                <input type="date" class="form-control" id="ioassigned_date" name="ioassigned_date" required>
+            </div>
+
+            <!-- Internal IO -->
+            <div class="form-group">
+                <label for="internal_io">Internal IO:</label>
+                <input type="text" class="form-control" id="internal_io" name="internal_io" required>
+            </div>
+
+            <!-- Place of Offence -->
+            <div class="form-group">
+                <label for="place_of_offence">Place of Offence:</label>
+                <input type="text" class="form-control" id="place_of_offence" name="place_of_offence" required>
+            </div>
+
+            <!-- Distance from PS -->
+            <div class="form-group">
+                <label for="distance_from_ps">Distance from PS:</label>
+                <input type="text" class="form-control" id="distance_from_ps" name="distance_from_ps" required>
+            </div>
+
+            <!-- Beat Name -->
+            <div class="form-group">
+                <label for="beat_name">Beat Name:</label>
+                <input type="text" class="form-control" id="beat_name" name="beat_name" required>
+            </div>
+
+            <!-- Village Area Name (Drop-down) -->
+            <div class="form-group">
+                <label for="village_area_name">Village Area Name:</label>
+                <select class="form-control" id="village_area_name" name="village_area_name">
+                    <option value="Village">VILLAGE</option>
+                    <!-- Add options here -->
+                </select>
+            </div>
+
+            <!-- Male -->
+            <div class="form-group">
+                <label for="male">Male:</label>
+                <input type="number" class="form-control" id="male" name="male" required>
+            </div>
+
+            <!-- Female -->
+            <div class="form-group">
+                <label for="female">Female:</label>
+                <input type="number" class="form-control" id="female" name="female" required>
+            </div>
+
+            <!-- Boy -->
+            <div class="form-group">
+                <label for="boy">Boy:</label>
+                <input type="number" class="form-control" id="boy" name="boy" required>
+            </div>
+
+            <!-- Girl -->
+            <div class="form-group">
+                <label for="girl">Girl:</label>
+                <input type="number" class="form-control" id="girl" name="girl" required>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+
+            <!-- Victim Count -->
+            <div class="form-group">
+                <label for="victim_count">Victim Count:</label>
+                <input type="number" class="form-control" id="victim_count" name="victim_count" required>
+            </div>
+
+            <!-- Accused Count -->
+            <div class="form-group">
+                <label for="accused_count">Accused Count:</label>
+                <input type="number" class="form-control" id="accused_count" name="accused_count" required>
+            </div>
+
+            <!-- Arrested Male -->
+            <div class="form-group">
+                <label for="arrested_male">Arrested Male:</label>
+                <input type="number" class="form-control" id="arrested_male" name="arrested_male" required>
+            </div>
+
+            <!-- Arrested Female -->
+            <div class="form-group">
+                <label for="arrested_female">Arrested Female:</label>
+                <input type="number" class="form-control" id="arrested_female" name="arrested_female" required>
+            </div>
+
+            <!-- Arrested Count -->
+            <div class="form-group">
+                <label for="arrested_count">Arrested Count:</label>
+                <input type="number" class="form-control" id="arrested_count" name="arrested_count" required>
+            </div>
+
+            <!-- Accused ChargeSheeted Count -->
+            <div class="form-group">
+                <label for="accused_chargesheeted_count">Accused ChargeSheeted Count:</label>
+                <input type="number" class="form-control" id="accused_chargesheeted_count" name="accused_chargesheeted_count" required>
+            </div>
+
+            <!-- Conviction Count -->
+            <div class="form-group">
+                <label for="conviction_count">Conviction Count:</label>
+                <input type="number" class="form-control" id="conviction_count" name="conviction_count" required>
+            </div>
+
+            <!-- FIR ID -->
+            <div class="form-group">
+                <label for="fir_id">FIR ID:</label>
+                <input type="text" class="form-control" id="fir_id" name="fir_id" required>
+            </div>
+
+            <!-- Unit ID -->
+            <div class="form-group">
+                <label for="unit_id">Unit ID:</label>
+                <input type="text" class="form-control" id="unit_id" name="unit_id" required>
+            </div>
+
+            <!-- Crime No -->
+            <div class="form-group">
+                <label for="crime_no">Crime No:</label>
+                <input type="text" class="form-control" id="crime_no" name="crime_no" required>
+            </div>
+
+       
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+</body>
+</html>
+
+
